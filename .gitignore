@@ -1,0 +1,13 @@
+.next
+.next_stale_*
+node_modules
+**/__pycache__/
+*.pyc
+storage/app_state.json
+storage/uploads/*
+storage/results/*
+storage/logs/*
+storage/jobs/*
+storage/transcripts/*
+!storage/examples/
+!storage/examples/**

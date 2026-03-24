@@ -1,0 +1,9 @@
+accelerate>=1.7.0
+httpx>=0.28.0
+safetensors>=0.5.3
+sentencepiece>=0.2.0
+torch>=2.7.0
+transformers>=4.53.0
+pywinauto>=0.6.8; platform_system == "Windows"
+pywin32>=310; platform_system == "Windows"
+uiautomation>=2.0.29; platform_system == "Windows"
