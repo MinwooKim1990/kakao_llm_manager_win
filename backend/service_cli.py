@@ -96,7 +96,7 @@ def default_app_state() -> Dict[str, Any]:
                 "답변이 명확한 재고 yes/no 가 아니면 사람 검토로 넘기고, "
                 "불필요하게 길게 말하지 마세요."
             ),
-            "selectedOrdersCsv": "examples/orders_example.csv",
+            "selectedOrdersCsv": "",
             "selectedMappingCsv": "",
         },
         "assistantMessage": (
@@ -112,9 +112,20 @@ def read_app_state() -> Dict[str, Any]:
     if not APP_STATE_PATH.exists():
         return default_app_state()
     try:
-        return json.loads(APP_STATE_PATH.read_text(encoding="utf-8"))
+        state = json.loads(APP_STATE_PATH.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return default_app_state()
+    config = state.get("config", {})
+    for key in ("selectedOrdersCsv", "selectedMappingCsv"):
+        relative_path = (config.get(key) or "").strip()
+        if relative_path:
+          try:
+              if not resolve_storage_path(relative_path).exists():
+                  config[key] = ""
+          except Exception:
+              config[key] = ""
+    state["config"] = config
+    return state
 
 
 def write_app_state(state: Dict[str, Any]) -> None:

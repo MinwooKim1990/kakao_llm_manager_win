@@ -24,7 +24,7 @@ const DEFAULT_STATE = {
     initialMessageTemplate: "안녕하세요. {item_name}{option_suffix}{quantity_suffix} 재고 있을까요?",
     systemPrompt:
       "답변이 명확한 재고 yes/no 가 아니면 사람 검토로 넘기고, 불필요하게 길게 말하지 마세요.",
-    selectedOrdersCsv: "examples/orders_example.csv",
+    selectedOrdersCsv: "",
     selectedMappingCsv: ""
   },
   assistantMessage:
@@ -53,7 +53,22 @@ export function readAppState() {
     return { ...DEFAULT_STATE };
   }
   try {
-    return JSON.parse(fs.readFileSync(APP_STATE_PATH, "utf8"));
+    const state = JSON.parse(fs.readFileSync(APP_STATE_PATH, "utf8"));
+    const config = state?.config || {};
+    for (const key of ["selectedOrdersCsv", "selectedMappingCsv"]) {
+      const relativePath = String(config[key] || "");
+      if (!relativePath) {
+        continue;
+      }
+      const fullPath = path.join(STORAGE_DIR, relativePath);
+      if (!fs.existsSync(fullPath)) {
+        config[key] = "";
+      }
+    }
+    return {
+      ...state,
+      config
+    };
   } catch {
     return { ...DEFAULT_STATE };
   }

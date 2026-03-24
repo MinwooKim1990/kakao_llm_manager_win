@@ -21,12 +21,10 @@
 - 이미 `npm run start` 가 켜져 있으면 먼저 종료한 뒤 다시 `npm run build` 해야 합니다.
 - 현재 카카오 자동화 방식은 전경 포커스와 클립보드에 의존합니다. 즉 완전한 백그라운드 자동화가 아니며, 작업 중에는 PC 사용이 불편해질 수 있습니다.
 
-## 예제 파일
+## 입력 파일
 
-- 주문 CSV: `storage/examples/orders_example.csv`
-- 다중 도매처 예제: `storage/examples/orders_multi_vendor_example.csv`
-- 프론트 공개 샘플: `public/sample-orders.csv`
-- 매핑 샘플: `public/sample-vendor-mapping.csv`
+- 레포에는 예제 주문/결과 파일을 포함하지 않습니다.
+- 실제 사용 시 프론트에서 주문 CSV와 필요하면 매핑 CSV를 직접 업로드해서 사용합니다.
 
 ## 화면에서 할 수 있는 일
 

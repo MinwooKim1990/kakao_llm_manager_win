@@ -4,10 +4,10 @@ node_modules
 **/__pycache__/
 *.pyc
 storage/app_state.json
+storage/examples/*
 storage/uploads/*
 storage/results/*
 storage/logs/*
 storage/jobs/*
 storage/transcripts/*
-!storage/examples/
-!storage/examples/**
+public/sample-*.csv
